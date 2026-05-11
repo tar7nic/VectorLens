@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Data & Models
+data/cache/
+*.index
+*.pkl
+*.npy
+*.pt
+.cache/
+
+# HuggingFace cache
+~/.cache/huggingface/
+
+# Streamlit
+.streamlit/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+*.env
+
+# Logs
+*.log
+logs/
