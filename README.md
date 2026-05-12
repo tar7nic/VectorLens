@@ -146,13 +146,21 @@ docker-compose up --build
 
 ## 📊 Evaluation Results
 
-| Metric | Semantic Only | Personalized | Delta |
-|--------|--------------|--------------|-------|
-| P@5 | ~0.40 | ~0.65 | +62% |
-| P@10 | ~0.35 | ~0.55 | +57% |
-| NDCG@10 | ~0.45 | ~0.68 | +51% |
+| Metric  | Semantic Only | Personalized | Delta |
+|---------|--------------|--------------|-------|
+| P@5     | 0.84         | 0.84         | 0.0   |
+| P@10    | 0.86         | 0.86         | 0.0   |
+| NDCG@10 | 0.94         | 0.94         | 0.0   |
 
 *Evaluated on 5 sample queries with known relevant categories. Run live via the Evaluation page.*
+
+Add this below the evaluation table in README:
+
+**Note:** Delta is 0.0 because the semantic model already retrieves the correct category 
+with high precision — leaving no room for the personalization layer to improve rankings. 
+Non-zero deltas appear when a user has built a real session profile (3+ clicks across mixed 
+categories) and searches ambiguous queries where multiple categories are plausible — 
+the boost then surfaces preferred-category results that semantic scoring alone would rank lower.
 
 ---
 
