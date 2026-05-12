@@ -154,8 +154,6 @@ docker-compose up --build
 
 *Evaluated on 5 sample queries with known relevant categories. Run live via the Evaluation page.*
 
-Add this below the evaluation table in README:
-
 **Note:** Delta is 0.0 because the semantic model already retrieves the correct category 
 with high precision — leaving no room for the personalization layer to improve rankings. 
 Non-zero deltas appear when a user has built a real session profile (3+ clicks across mixed 
