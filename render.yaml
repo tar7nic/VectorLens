@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: semantic-search-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python build_index.py
+    startCommand: uvicorn api.routes:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
