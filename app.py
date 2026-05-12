@@ -3,6 +3,10 @@ import streamlit as st
 import httpx
 from config import API_BASE_URL, CATEGORY_MAP
 
+
+from utils.query_log import init_db, log_query
+init_db()
+
 st.set_page_config(
     page_title="Semantic Search",
     page_icon="🔍",
@@ -142,11 +146,13 @@ def fetch_reranked(query, user_profile):
             timeout=30,
         )
         data = r.json()
-        return data.get("results", []), data.get("response_time_ms"), data.get("total_indexed")
+        results = data.get("results", [])
+        st.session_state["last_results"] = results
+        # st.write(f"DEBUG: logging query={query.strip()}, cat={top_cat}, rt={rt}")
+        return results, data.get("response_time_ms"), data.get("total_indexed")
     except Exception as e:
         st.error(f"API error: {e}")
         return [], None, None
-
 
 def record_click(item):
     profile = st.session_state.user_profile
@@ -303,6 +309,8 @@ if search_clicked and query.strip():
             st.session_state.query_times.append(rt)
         if total:
             st.session_state.total_indexed = total
+            top_cat = results[0]["category"] if results else "unknown"
+            log_query(query.strip(), str(top_cat), rt or 0)
 
 # ── Filter Bar ────────────────────────────────────────────────────────────────
 if st.session_state.results:
